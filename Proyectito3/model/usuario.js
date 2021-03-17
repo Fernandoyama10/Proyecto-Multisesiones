@@ -2,6 +2,9 @@ module.exports={
     getdata:function (conexion,funcion){
         conexion.query("SELECT * FROM usuarios", funcion);
     },
+    verifyUser:function (conexion,email,funcion){
+        conexion.query('SELECT * FROM usuarios WHERE email = ?',[email], funcion);
+    },
     insert:function (conexion,datos,archivos,funcion){
         conexion.query("INSERT INTO usuarios ( name, image, password, email) VALUES (?,?,?,?) ",[datos.name, archivos.filename, datos.password, datos.email], funcion);
     },

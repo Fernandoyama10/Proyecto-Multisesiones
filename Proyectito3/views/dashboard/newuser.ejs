@@ -1,0 +1,76 @@
+<%- include ../layouts/header_dashboard.ejs %> 
+
+       <!-- Container Fluid-->
+       <div class="container-fluid" id="container-wrapper">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Inicio/Crear Usuario</h1>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Pagina Principal</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+ 
+          </ol>
+        </div>
+       
+        <!-- Row -->
+        <div class="row">
+          <!-- Datatables -->
+          <div class="col-lg-12">
+            <div class="card mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">| Formulario para crear un usuario | </h6>
+              </div>
+ 
+              <div class="card-body">
+                <h5 class="card-title">Datos del Usuario:</h5>
+                <p class="card-text">
+        
+                    <form method="post" action="/dashboard" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="my-input">Nombre Usuario:</label>
+                            <input id="my-input" class="form-control" type="text" minlength="5" maxlength = "200"  name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="my-input">Contraseña:</label>
+                            <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="my-input">Repeitr Contraseña:</label>
+                          <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password2" required>
+                      </div>
+                        <div class="form-group">
+                            <label for="my-input">Email:</label>
+                            <input id="my-input" class="form-control" type="email" autocomplete="off" name="email" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="my-input">Imagen</label>
+                            <input id="my-input" class="form-control-file" type="file" name="file" required>
+                        </div>
+                        <br>
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    <a class="btn btn-primary" href="/dashboard">Cancelar</a>
+                    </form>
+                </p>
+            </div>
+            </div>
+          </div>
+          <!-- DataTable with Hover -->
+      
+        </div>
+
+
+
+
+
+        <!--Row-->
+
+        <!-- Documentation Link -->
+
+
+        <!-- Modal Logout -->
+        
+
+      </div>
+      <!---Container Fluid-->
+
+<%- include ../layouts/footer_dashboard.ejs %> 

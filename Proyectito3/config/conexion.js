@@ -7,6 +7,7 @@ var con= mysql.createConnection({
     password:'12345',
 <<<<<<< Updated upstream
     database:'usuariosprueba'
+<<<<<<< HEAD
 
 
 
@@ -14,6 +15,9 @@ var con= mysql.createConnection({
     database:'bd_proyectito'
     
 >>>>>>> Stashed changes
+=======
+    
+>>>>>>> brandon
 }
 
 );
