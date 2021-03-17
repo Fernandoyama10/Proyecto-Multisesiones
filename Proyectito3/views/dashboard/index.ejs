@@ -1,0 +1,92 @@
+<%- include ../layouts/header_dashboard.ejs %> 
+       <!-- Container Fluid-->
+       <div class="container-fluid" id="container-wrapper">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Pagina Principal</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+ 
+          </ol>
+        </div>
+       
+        <!-- Row -->
+        <div class="row">
+          <!-- Datatables -->
+          <div class="col-lg-12">
+            <div class="card mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
+              </div>
+ 
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <a href="/dashboard/newuser" class="btn btn-primary" type="button">Crear Usuario</a>
+                </div>
+    
+              <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">
+                  <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% for( let usuario = 0; usuario < usuarios.length; usuario++ ) { %>
+                        <tr>
+                   
+                            <td> <%=usuarios[usuario].id_user %> </td>
+                            <td> <%=usuarios[usuario].name %> </td>
+                            <td> <%=usuarios[usuario].email %> </td>
+                            <td> <img class="img-thumbnail" width="100" src="images/<%=usuarios[usuario].image %>" alt=""></td>
+                            <td>       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                              <form class="form-inline" method="get" action="/dashboard/edit/<%=usuarios[usuario].id_user %>">
+                                  <button class="btn btn-warning" type="submit">Editar</button>
+                              </form>
+                          </div>
+                          |
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                              <form class="form-inline" method="post" action="/dashboard/delete/<%=usuarios[usuario].id_user %>">
+                                  <button class="btn btn-danger" type="submit">Eliminar</button>
+                              </form>
+                          </div>  </td>
+                        </tr>
+                        <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- DataTable with Hover -->
+      
+        </div>
+
+
+
+
+
+        <!--Row-->
+
+        <!-- Documentation Link -->
+
+
+        <!-- Modal Logout -->
+        
+
+      </div>
+      <!---Container Fluid-->
+    
+
+      <%- include ../layouts/footer_dashboard.ejs %> 

@@ -13,13 +13,13 @@ index:function(req,res){
 usuario.getdata(conexion,function (err,datos) {
     console.log(datos);
     //variable usuarios:datos recibe los datos de la consulta.
-    res.render('users/index', { title: 'Usuarios', usuarios:datos });
+    res.render('dashboard/index', { title: 'Usuarios', usuarios:datos });
 });
 },
 
 //crear ruta para formulario crear usuario
 newuser:function (req,res) {
-    res.render('users/newuser');
+    res.render('dashboard/newuser');
 },
 
 //funcion para guardar usuario en la base de datos y guardar imagen
@@ -28,7 +28,7 @@ save:function (req,res) {
   console.log(req.file.filename);
   // req.body son los datos recibidos por el formulario y req.file es el archivo imagen
 usuario.insert(conexion,req.body,req.file,function (err,datos) {
-   res.redirect('/users');
+   res.redirect('/dashboard');
 });
 },
 
@@ -46,7 +46,7 @@ delete:function (req,res){
     }
     //funcion que permite borrar por el id del usuario (se obtiene por req.params.id) 
     usuario.deletePerId(conexion,req.params.id,function(err) {
-      res.redirect('/users');
+      res.redirect('/dashboard');
     });
    
 
@@ -56,7 +56,7 @@ delete:function (req,res){
 edit:function (req,res){
   usuario.returnPerId(conexion,req.params.id, function(err,registros){
     console.log(registros[0]);
-    res.render('users/edit', {user:registros[0]});
+    res.render('dashboard/edit', {user:registros[0]});
   });
  
 },
@@ -92,7 +92,7 @@ update:function (req,res) {
   }
   
 
-  res.redirect('/users');
+  res.redirect('/dashboard');
  
  
 }
