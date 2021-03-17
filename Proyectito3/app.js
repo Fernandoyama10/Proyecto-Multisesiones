@@ -13,6 +13,7 @@ dotenv.config({ path: './.env'});
 
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
+var inicioRouter = require('./routes/inicio');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/index',inicioRouter);
 
 
 // catch 404 and forward to error handler
