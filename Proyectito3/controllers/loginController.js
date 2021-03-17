@@ -61,9 +61,6 @@ module.exports={
         try {
         /////TRY CATCH
         /////TRY CATCH  
-      
-    
-    
         
       //retorna datos del user de acuerdo a si existe el email
       usuario.verifyUser(conexion,req.body.email, function(err,registros) {
@@ -121,6 +118,10 @@ module.exports={
         }
     },
     fotos:function (req,res) {
+
    res.render('inicio/fotos', {roles:req.roles, user:req.user});
+
       }
+
+
 }
