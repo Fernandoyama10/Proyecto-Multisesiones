@@ -1,8 +1,4 @@
-module.exports={
-    getAccess:function (conexion,id,funcion){
-        conexion.query('SELECT acceso FROM permisos WHERE id_user = ?',[id], funcion);
-    },
-}
+
 
 module.exports={
     getRoles:function (conexion,id,funcion){

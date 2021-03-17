@@ -11,7 +11,10 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 
 module.exports={
-    login: async function (req,res,next) {
+    inicio:function (req,res) {
+      res.render('index');
+    },
+    login: function (req,res,next) {
         res.render('index');
       },
       islogged: async function (req,res,next) {
@@ -21,13 +24,18 @@ module.exports={
             const id = await promisify(jwt.verify)(req.cookies.jwt,
             process.env.JWT_SECRET
             );
-            usuario.returnPerId(conexion,id.id, function(err,registros){
-              if (registros.length > 0) {
-                res.render('dashboard/edit', {user:registros[0]});
-              }
-              else{
-                res.render('index');
-              }
+            usuario.returnPerId(conexion,id.id, function(err,user){
+                req.user = user[0];
+                permiso.getRoles(conexion,id.id, function(err,roles){
+                    if (user.length > 0) {
+                        req.roles = roles[0];
+                      res.render('inicio/index', {roles:req.roles, user:req.user});
+                    }
+                    else{
+                      res.render('index');
+                    }
+                });
+          
             });
           } catch (error) {
             console.log(error);
@@ -83,19 +91,20 @@ module.exports={
     
             res.cookie('jwt', token, cookieOptions );
 
-            permiso.getRoles(conexion,id, function(err,registros2) {
-
-                req.roles = registros2;
-                console.log("ROLES SON");
-                console.log(req.roles);
-
-            });
-
-            res.render('dashboard/edit', {user:registros[0]});
-    
-    
-              console.log("BIENVENIDO");
+            usuario.returnPerId(conexion,id, function(err,user){
+              req.user = user[0];
+              permiso.getRoles(conexion,id, function(err,roles){
+                  if (user.length > 0) {
+                      req.roles = roles[0];
+                    res.render('inicio/index', {roles:req.roles, user:req.user});
+                  }
+                  else{
+                    res.render('index');
+                  }
+              });
         
+          });
+              console.log("BIENVENIDO");
           } else{
             console.log("CONTRASEÑA INCORRECTA");
           }
@@ -111,10 +120,7 @@ module.exports={
           console.log(error);
         }
     },
-    permisos: async function (req,res) {
-
-       
-
-
+    fotos:function (req,res) {
+   res.render('inicio/fotos', {roles:req.roles, user:req.user});
       }
 }

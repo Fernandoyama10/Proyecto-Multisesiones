@@ -1,11 +1,35 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Bienvenido a <%= title %></p>
+    <h1></h1>
+    <p>Bienvenidooo a a </p>
+
+    <div class="card-body">
+      <h5 class="card-title">Datos del Usuario:</h5>
+      <p class="card-text">
+
+          <form method="post" action="/aunthentic">
+              <div class="form-group">
+                  <label for="my-input">Correo:</label>
+                  <input id="email" class="form-control" type="text" minlength="5" maxlength = "200"  name="email" required>
+              </div>
+              <div class="form-group">
+                  <label for="my-input">Contraseña:</label>
+                  <input id="password" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
+              </div>
+          
+              <br>
+              <button class="btn btn-success" type="submit">Iniciar Sesión</button>
+          </form>
+      </p>
+  </div>
+
+
   </body>
 </html>
