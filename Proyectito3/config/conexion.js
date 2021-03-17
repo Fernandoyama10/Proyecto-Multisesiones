@@ -5,19 +5,11 @@ var con= mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'12345',
-<<<<<<< Updated upstream
+
     database:'usuariosprueba'
-<<<<<<< HEAD
 
 
 
-=======
-    database:'bd_proyectito'
-    
->>>>>>> Stashed changes
-=======
-    
->>>>>>> brandon
 }
 
 );
