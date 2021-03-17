@@ -6,21 +6,32 @@ var usuario= require('../model/usuario');
 
 //libreria filesystem que permite borrar la imagen
 var borrar= require("fs");
+const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 module.exports={
 
     //obtener datos en el index de /users para mandar los datos a la vista users
-index:function(req,res){
-usuario.getdata(conexion,function (err,datos) {
-    console.log(datos);
-    //variable usuarios:datos recibe los datos de la consulta.
+index: function(req,res,next){
+
+usuario.getdata(conexion, async function (err,datos) {
+  if( req.cookies.jwt) {
     res.render('dashboard/index', { title: 'Usuarios', usuarios:datos });
+  }
+  else{
+    res.render('index');
+  }
+  
+
 });
+
+
 },
 
 //crear ruta para formulario crear usuario
 newuser:function (req,res) {
     res.render('dashboard/newuser');
 },
+
 
 //funcion para guardar usuario en la base de datos y guardar imagen
 save:function (req,res) {
@@ -96,5 +107,6 @@ update:function (req,res) {
  
  
 }
+
 
 }

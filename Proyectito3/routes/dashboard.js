@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //recibe metodos del controlador
 const usuarioController= require("../controllers/usuariosController");
+const loginController= require("../controllers/loginController");
 //libreria para guardar imagenes
 var multer = require('multer');
 // sirve para generar un nombre unico a la imagen por si un usuario mete un nombre ya existente
@@ -27,7 +28,7 @@ var cargar = multer({ storage:rutaAlmacen});
 
 /* GET home page. */
 //Obtener datos en el index que llena el datatable
-router.get('/',usuarioController.index);
+router.get('/', usuarioController.index, loginController.islogged);
 //genera ruta para el formulario
 router.get('/newuser',usuarioController.newuser);
 //Guardar un nuevo usuario y manda la imagen con la libreria multer
@@ -42,5 +43,6 @@ router.get("/edit/:id",usuarioController.edit);
 
 //
 router.post("/update",cargar.single("file"),usuarioController.update);
+//
 
 module.exports = router;
