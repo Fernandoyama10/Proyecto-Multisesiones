@@ -9,5 +9,6 @@ router.get('/', loginController.islogged, permisoController.home);
 router.get('/juegos',  loginController.islogged, permisoController.juegos);
 router.get('/fotos',  loginController.islogged, permisoController.fotos);
 router.get('/juegos_mesa',  loginController.islogged, permisoController.juegosdemesa);
+router.get('/ilustraciones',  loginController.islogged, permisoController.ilustraciones);
 
 module.exports = router;
