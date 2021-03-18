@@ -5,6 +5,9 @@ module.exports={
     verifyUser:function (conexion,email,funcion){
         conexion.query('SELECT * FROM usuarios WHERE email = ?',[email], funcion);
     },
+    verifyAdmin:function (conexion,email,funcion){
+        conexion.query('SELECT * FROM usuarios INNER JOIN operations ON operations.id_user = usuarios.id_user  WHERE email = ? and id_module=6',[email], funcion);
+    },
     insert:function (conexion,datos,archivos,funcion){
         conexion.query("INSERT INTO usuarios ( name, image, password, email) VALUES (?,?,?,?) ",[datos.name, archivos.filename, datos.password, datos.email], funcion);
     },
