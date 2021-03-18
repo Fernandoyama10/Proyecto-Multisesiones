@@ -108,7 +108,6 @@ module.exports={
          }
      
       },
-<<<<<<< HEAD
       adminlogin:function (req,res,next) {
         usuario.getdata(conexion, async function (err,datos) {
      
@@ -131,7 +130,6 @@ module.exports={
         }
     });
       },
-=======
 
       ilustraciones:function (req,res,next) {
         if(!req.user) {
@@ -155,5 +153,4 @@ module.exports={
      
       }
 
->>>>>>> fernando
 }
