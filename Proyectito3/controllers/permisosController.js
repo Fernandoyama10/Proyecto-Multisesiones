@@ -108,6 +108,7 @@ module.exports={
          }
      
       },
+<<<<<<< HEAD
       adminlogin:function (req,res,next) {
         usuario.getdata(conexion, async function (err,datos) {
      
@@ -130,4 +131,29 @@ module.exports={
         }
     });
       },
+=======
+
+      ilustraciones:function (req,res,next) {
+        if(!req.user) {
+            res.redirect('/');
+         } else if (req.user) {
+             const structure = req.role;
+
+             if (structure.length > 0)
+             {
+                if(structure[4].status  == "false"){
+                    res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+                }else{
+                    res.render('inicio/ilustraciones', { title: 'Login', user: req.user, roles:req.role });
+                }
+             }
+             else
+             {
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+             }
+         }
+     
+      }
+
+>>>>>>> fernando
 }
