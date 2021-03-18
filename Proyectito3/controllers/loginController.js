@@ -12,7 +12,7 @@ const { promisify } = require('util');
 
 module.exports={
     inicio:function (req,res) {
-      res.render('index');
+      res.render('inicio/index');
     },
     login: function (req,res,next) {
         res.render('index');
@@ -121,7 +121,21 @@ module.exports={
 
    res.render('inicio/fotos', {roles:req.roles, user:req.user});
 
-      }
+      },
+
+      juegos:function (req,res) {
+
+        res.render('inicio/juegos', {roles:req.roles, user:req.user});
+     
+           },
+
+           juegos_mesa:function (req,res) {
+
+            res.render('inicio/juegos_mesa', {roles:req.roles, user:req.user});
+         
+               }
+
+
 
 
 }
