@@ -23,11 +23,12 @@
               <div class="card-body">
                 <h5 class="card-title">Datos del Usuario:</h5>
                 <p class="card-text">
-        
+
+                  
                     <form method="post" action="/dashboard" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="my-input">Nombre Usuario:</label>
-                            <input id="my-input" class="form-control" type="text" minlength="5" maxlength = "200"  name="name" required>
+                            <input id="my-input" class="form-control" type="text" minlength="5" maxlength = "100"  name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="my-input">Contraseña:</label>
@@ -39,12 +40,71 @@
                       </div>
                         <div class="form-group">
                             <label for="my-input">Email:</label>
-                            <input id="my-input" class="form-control" type="email" autocomplete="off" name="email" required>
+                            <input id="my-input" class="form-control" type="email" autocomplete="off" name="email" maxlength = "30"  required>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="my-input">Imagen</label>
                             <input id="my-input" class="form-control-file" type="file" name="file" required>
+                        </div>
+                        <hr style="background-color:gainsboro;">
+                        <div><h4>Acceso a modulos</h4></div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label for="my-input">Juegos</label>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                  Permitir acceso
+                                </label>
+                              </div>
+                          </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label for="my-input">Fotos</label>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                  Permitir acceso
+                                </label>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="my-input">Juego de mesa</label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                              <label class="form-check-label" for="flexCheckChecked">
+                                Permitir acceso
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label for="my-input">Ilustraciones</label>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Permitir acceso
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="my-input">Dashboard</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                          <label class="form-check-label" for="flexCheckChecked">
+                            Permitir acceso
+                          </label>
+                        </div>
+                    </div>
+                  </div>
                         </div>
                         <br>
                         <button class="btn btn-success" type="submit">Guardar</button>
