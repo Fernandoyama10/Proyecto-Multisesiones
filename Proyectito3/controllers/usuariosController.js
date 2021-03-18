@@ -14,14 +14,16 @@ module.exports={
 index: function(req,res,next){
 
 usuario.getdata(conexion, async function (err,datos) {
-  if( req.cookies.jwt) {
+
+  if(!req.user) {
+    res.redirect('/');
+  } else if (req.user) {
     res.render('dashboard/index', { title: 'Usuarios', usuarios:datos });
   }
-  else{
-    res.render('index');
-  }
-  
 
+
+
+  
 });
 
 

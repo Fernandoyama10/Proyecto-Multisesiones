@@ -5,10 +5,23 @@ const loginController= require("../controllers/loginController");
 
 
 /* GET home page. */
-router.get('/',loginController.islogged,loginController.login);
 
+router.get('/', loginController.islogged, function(req, res, next) {
 
+    if(!req.user) {
+        res.render('index');
+    } else if (req.user) {
+        const structure = req.role;
+        if(structure[0].status  == "false"){
+            res.send('NO PERMISO');
+        }else{
+            res.render('inicio/index', { title: 'Login', user: req.user, roles:req.role });
+        }
+    }
+    });
+  
 router.get("/logout",loginController.logout);
-router.post('/aunthentic',loginController.verifyuser);
+router.post('/index/true',loginController.verifyuser);
+
 module.exports = router;
 //<%= title %>

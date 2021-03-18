@@ -11,42 +11,56 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 
 module.exports={
-    inicio:function (req,res) {
-      res.render('index');
+  
+    inicio:function (req,res,next) {
+      if(!req.user) {
+        res.redirect('/');
+      } else if (req.user) {
+        res.render('inicio/index', { title: 'Login', user: req.user, roles: req.role });
+      }
     },
     login: function (req,res,next) {
         res.render('index');
       },
-      islogged: async function (req,res,next) {
+    islogged: async function (req,res,next) {
         if( req.cookies.jwt) {
           try {
             //1) verify the token
             const id = await promisify(jwt.verify)(req.cookies.jwt,
             process.env.JWT_SECRET
             );
-            usuario.returnPerId(conexion,id.id, function(err,user){
-                req.user = user[0];
-                permiso.getRoles(conexion,id.id, function(err,roles){
-                    if (user.length > 0) {
-                        req.roles = roles[0];
-                      res.render('inicio/index', {roles:req.roles, user:req.user});
-                    }
-                    else{
-                      res.render('index');
-                    }
-                });
+            usuario.returnPerId(conexion,id.id, function(err,resultado){
+           
+              permiso.getRoles(conexion,id.id, function(err,roles){
+     
+
+                if(!resultado) {
+                  return next();
+                }if(!roles){
+                  return next();
+                }
+
+                req.user = resultado[0];
+                req.role = roles;
+                console.log("User is")
+                console.log(req.user);
+                console.log("Elementos son")
+                console.log(req.role);
+                return next();
+              });
+            
+   
+            
+
           
             });
           } catch (error) {
             console.log(error);
-      
+            return next();
           }
         } else {
-            res.render('index');
-       
+          next();
         }
-      
-      
       },
       logout:function (req,res) {
         res.cookie('jwt', 'logout', {
@@ -56,12 +70,15 @@ module.exports={
         res.render('index');
       },
       verifyuser: function (req,res) {
-
-
         try {
+
+          if( !req.body.email || !req.body.password ){
+            return res.status(400).render('index', {
+              message : 'Por favor proporciona una contraseña o correo.'
+            })
+          }
         /////TRY CATCH
         /////TRY CATCH  
-        
       //retorna datos del user de acuerdo a si existe el email
       usuario.verifyUser(conexion,req.body.email, function(err,registros) {
         console.log(err);
@@ -87,26 +104,17 @@ module.exports={
             }
     
             res.cookie('jwt', token, cookieOptions );
-
-            usuario.returnPerId(conexion,id, function(err,user){
-              req.user = user[0];
-              permiso.getRoles(conexion,id, function(err,roles){
-                  if (user.length > 0) {
-                      req.roles = roles[0];
-                    res.render('inicio/index', {roles:req.roles, user:req.user});
-                  }
-                  else{
-                    res.render('index');
-                  }
-              });
-        
-          });
+            res.status(200).redirect("/");
               console.log("BIENVENIDO");
           } else{
-            console.log("CONTRASEÑA INCORRECTA");
+            return res.render('index', {
+              message: 'Contraseña invalida.'
+          });
           }
       } else{
-        console.log("NO EXISTE USER");
+        return res.render('index', {
+          message: 'El usuario no existe.'
+      });
       }
     
     
