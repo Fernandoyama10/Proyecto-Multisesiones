@@ -118,19 +118,18 @@ module.exports={
           if (structure.length > 0)
           {
             if(structure[5].status  == "false"){
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+                res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.role });
               }else{
                 res.render('dashboard/index', { title: 'Login', user: req.user, roles: req.role, usuarios:datos });
               }
           }
           else
           {
-            res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+            res.render('dashboard/login', { title: 'Login', user: req.user, roles:req.role });
           }
         }
     });
       },
-      
       ilustraciones:function (req,res,next) {
         if(!req.user) {
             res.redirect('/');

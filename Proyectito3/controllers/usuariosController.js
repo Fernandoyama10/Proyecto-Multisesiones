@@ -31,7 +31,27 @@ usuario.getdata(conexion, async function (err,datos) {
 
 //crear ruta para formulario crear usuario
 newuser:function (req,res) {
-    res.render('dashboard/newuser');
+
+  if(!req.user) {
+    res.render('dashboard/login');
+  } else if (req.user) {
+    const structure = req.role;
+    if (structure.length > 0)
+    {
+      if(structure[5].status  == "false"){
+          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.role });
+        }else{
+          res.render('dashboard/newuser', { title: 'Login', user: req.user, roles: req.role });
+        }
+    }
+    else
+    {
+      res.render('dashboard/login', { title: 'Login', user: req.user, roles:req.role });
+    }
+  }
+
+
+  
 },
 
 
@@ -68,8 +88,27 @@ delete:function (req,res){
 //funcion para recibir los datos del usuario mediante su id para llenarlos en el formulario de actualizar datos usuario
 edit:function (req,res){
   usuario.returnPerId(conexion,req.params.id, function(err,registros){
-    console.log(registros[0]);
-    res.render('dashboard/edit', {user:registros[0]});
+
+
+    if(!req.user) {
+      res.render('dashboard/login');
+    } else if (req.user) {
+      const structure = req.role;
+      if (structure.length > 0)
+      {
+        if(structure[5].status  == "false"){
+            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.role });
+          }else{
+            res.render('dashboard/edit', { title: 'Login', user: req.user, roles: req.role, usuarios:datos, user2:registros[0] });
+          }
+      }
+      else
+      {
+        res.render('dashboard/login', { title: 'Login', user: req.user, roles:req.role });
+      }
+    }
+
+
   });
  
 },

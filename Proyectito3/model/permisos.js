@@ -1,5 +1,5 @@
 module.exports={
     getRoles:function (conexion,id,funcion){
-        conexion.query('SELECT id_operation, status FROM operations where id_user=?',[id], funcion);
+        conexion.query('SELECT id_operation, status, id_module FROM operations where id_user=?',[id], funcion);
     },
 }

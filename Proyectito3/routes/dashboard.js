@@ -31,7 +31,7 @@ var cargar = multer({ storage:rutaAlmacen});
 //Obtener datos en el index que llena el datatable
 router.get('/', loginController.islogged, permisoController.adminlogin);
 //genera ruta para el formulario
-router.get('/newuser',usuarioController.newuser);
+router.get('/newuser',loginController.islogged,usuarioController.newuser);
 //Guardar un nuevo usuario y manda la imagen con la libreria multer
 // cargar.single("file") esta cargando el nombre del input file del formulario (name="file")
 router.post("/",cargar.single("file"),usuarioController.save);
@@ -40,8 +40,9 @@ router.post("/",cargar.single("file"),usuarioController.save);
 router.post("/delete/:id",usuarioController.delete);
 
 //muestra los datos en la vista edit mediante el id recibido
-router.get("/edit/:id",usuarioController.edit);
+router.get("/edit/:id",loginController.islogged,usuarioController.edit);
 
+router.get("/logout",loginController.logoutadmin);
 //
 router.post("/update",cargar.single("file"),usuarioController.update);
 //
