@@ -1,36 +1,84 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1></h1>
-    <p>Bienvenidooo a a </p>
+<html lang="en">
+<head>
+	<title>Login V19</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/stylesheets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/stylesheets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+        <form class="login100-form validate-form" method="post" action="/admin">
+			
+					<span class="login100-form-title p-b-33">
+						Dashboard Login
+					</span>
 
-    <div class="card-body">
-      <h5 class="card-title">Datos del Usuario:</h5>
-      <p class="card-text">
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Ingresa tu correo">
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
 
-          <form method="post" action="/admin">
-              <div class="form-group">
-            
-                  <label for="my-input">Correo:</label>
-                  <input id="email" class="form-control" type="text" minlength="5" maxlength = "200"  name="email" required>
-              </div>
-              <div class="form-group">
-                  <label for="my-input">Contraseña:</label>
-                  <input id="password" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
-              </div>
-          
-              <br>
-              <button class="btn btn-success" type="submit">Iniciar Sesión</button>
-          </form>
-      </p>
-  </div>
+					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password" placeholder="Ingresa tu password">
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
 
+					<div class="container-login100-form-btn m-t-20">
+						<button class="login100-form-btn" type="submit">
+							Iniciar Sesión
+						</button>
+					</div>
 
-  </body>
+			
+
+			
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	
+<!--===============================================================================================-->
+	<script src="/stylesheets/vendor/jquery/jquery.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/stylesheets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/stylesheets/vendor/bootstrap/js/popper.js"></script>
+	<script src="/stylesheets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/stylesheets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<script src="/stylesheets/js/main.js"></script>
+
+</body>
 </html>
+

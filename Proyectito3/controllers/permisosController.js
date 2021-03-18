@@ -108,7 +108,6 @@ module.exports={
          }
      
       },
-<<<<<<< HEAD
       adminlogin:function (req,res,next) {
         usuario.getdata(conexion, async function (err,datos) {
      
@@ -131,8 +130,6 @@ module.exports={
         }
     });
       },
-=======
-
       ilustraciones:function (req,res,next) {
         if(!req.user) {
             res.redirect('/');
@@ -152,8 +149,6 @@ module.exports={
                 res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
              }
          }
-     
-      }
 
->>>>>>> fernando
+      }
 }
