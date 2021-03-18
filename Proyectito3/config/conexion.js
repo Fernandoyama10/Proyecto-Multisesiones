@@ -4,9 +4,12 @@ var con= mysql.createConnection({
 
     host:'localhost',
     user:'root',
-    password:'12345',
-    database:'usuariosprueba'
-    
+    password:'1234',
+
+    database:'bd_proyectito'
+
+
+
 }
 
 );

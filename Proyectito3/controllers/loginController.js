@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 
 module.exports={
+
   
     inicio:function (req,res,next) {
       if(!req.user) {
@@ -18,6 +19,7 @@ module.exports={
       } else if (req.user) {
         res.render('inicio/index', { title: 'Login', user: req.user, roles: req.role });
       }
+
     },
     login: function (req,res,next) {
         res.render('index');
@@ -129,7 +131,21 @@ module.exports={
 
    res.render('inicio/fotos', {roles:req.roles, user:req.user});
 
-      }
+      },
+
+      juegos:function (req,res) {
+
+        res.render('inicio/juegos', {roles:req.roles, user:req.user});
+     
+           },
+
+           juegos_mesa:function (req,res) {
+
+            res.render('inicio/juegos_mesa', {roles:req.roles, user:req.user});
+         
+               }
+
+
 
 
 }

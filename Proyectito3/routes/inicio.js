@@ -22,7 +22,8 @@ router.get('/fotos',  loginController.islogged, function(req, res, next) {
     }
 
 });
-  
+router.get("/juegos",loginController.juegos);
 
+router.get("/juegos_mesa",loginController.juegos_mesa);
 
 module.exports = router;
