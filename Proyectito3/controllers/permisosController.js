@@ -107,5 +107,27 @@ module.exports={
              }
          }
      
-      }
+      },
+      adminlogin:function (req,res,next) {
+        usuario.getdata(conexion, async function (err,datos) {
+     
+        if(!req.user) {
+          res.render('dashboard/login');
+        } else if (req.user) {
+          const structure = req.role;
+          if (structure.length > 0)
+          {
+            if(structure[5].status  == "false"){
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+              }else{
+                res.render('dashboard/index', { title: 'Login', user: req.user, roles: req.role, usuarios:datos });
+              }
+          }
+          else
+          {
+            res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+          }
+        }
+    });
+      },
 }
