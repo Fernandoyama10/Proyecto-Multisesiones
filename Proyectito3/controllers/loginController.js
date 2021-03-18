@@ -65,6 +65,13 @@ module.exports={
         });
         res.render('index');
       },
+      logoutadmin:function (req,res) {
+        res.cookie('jwt', 'logout', {
+          expires: new Date(Date.now() + 2*1000),
+          httpOnly: true
+        });
+        res.render('dashboard/login');
+      },
       verifyuser: function (req,res) {
         try {
 

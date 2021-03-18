@@ -25,24 +25,24 @@
                 <p class="card-text">
                     <form method="post" action="../update/" enctype="multipart/form-data">
         
-                        <input type="hidden" name="id_user" value="<%=user.id_user %> ">
+                        <input type="hidden" name="id_user" value="<%=user2.id_user %> ">
                     
                         <div class="form-group">
                             <label for="my-input">Nombre Usuario:</label>
-                            <input id="my-input" value="<%=user.name %>" class="form-control" type="text" name="name">
+                            <input id="my-input" value="<%=user2.name %>" class="form-control" type="text" name="name">
                         </div>
                         <div class="form-group">
                             <label for="my-input">Contraseña:</label>
-                            <input id="my-input" value="<%=user.password %>" class="form-control" type="password" name="password">
+                            <input id="my-input" value="<%=user2.password %>" class="form-control" type="password" name="password">
                         </div>
                         <div class="form-group">
                             <label for="my-input">Email:</label>
-                            <input id="my-input" value="<%=user.email %>" class="form-control" type="text" name="email">
+                            <input id="my-input" value="<%=user2.email %>" class="form-control" type="text" name="email">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="my-input">Imagen</label>
-                            <img class="img-thumbnail" src="../../images/<%=user.image %>" width="100" alt=""><br>
+                            <img class="img-thumbnail" src="../../images/<%=user2.image %>" width="100" alt=""><br>
                             <input id="my-input" class="form-control-file" type="file" name="file">
                         </div>
                     <br>
