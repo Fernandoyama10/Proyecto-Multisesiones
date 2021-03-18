@@ -31,6 +31,7 @@ module.exports={
     login: function (req,res,next) {
         res.render('index');
       },
+
     islogged: async function (req,res,next) {
         if( req.cookies.jwt) {
           try {
