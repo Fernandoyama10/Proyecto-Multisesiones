@@ -57,6 +57,7 @@ newuser:function (req,res) {
 
 //funcion para guardar usuario en la base de datos y guardar imagen
 save:function (req,res) {
+  console.log("LOS DATOS SON REQ BODY");
   console.log(req.body);
   console.log(req.file.filename);
   // req.body son los datos recibidos por el formulario y req.file es el archivo imagen
