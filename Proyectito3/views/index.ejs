@@ -16,6 +16,10 @@
 
           <form method="post" action="/index/true">
               <div class="form-group">
+                <% if(typeof message!= "undefined" && message) { %>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
+
+              <% } %>
                   <label for="my-input">Correo:</label>
                   <input id="email" class="form-control" type="text" minlength="5" maxlength = "200"  name="email" required>
               </div>
