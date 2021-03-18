@@ -13,7 +13,7 @@ router.get('/', loginController.islogged, function(req, res, next) {
     } else if (req.user) {
         const structure = req.role;
         if(structure[0].status  == "false"){
-            res.send('NO PERMISO');
+            res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
         }else{
             res.render('inicio/index', { title: 'Login', user: req.user, roles:req.role });
         }
