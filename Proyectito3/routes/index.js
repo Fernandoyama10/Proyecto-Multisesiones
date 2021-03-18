@@ -6,7 +6,7 @@ const permisoController= require("../controllers/permisosController");
 
 /* GET home page. */
 
-router.get('/', loginController.islogged, permisoController.logininicio);
+router.get('/', loginController.islogged, permisoController.afterlogin);
 router.get("/logout",loginController.logout);
 router.post('/index/true',loginController.verifyuser);
 

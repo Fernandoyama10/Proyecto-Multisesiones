@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 
 module.exports={
-    logininicio: function (req,res,next){
+    afterlogin: function (req,res,next){
         if(!req.user) {
           res.render('index');
       } else if (req.user) {
@@ -27,7 +27,85 @@ module.exports={
           else{
               res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
           }
-        
       }
+      },
+      home:function (req,res,next) {
+        if(!req.user) {
+          res.redirect('/');
+        } else if (req.user) {
+          const structure = req.role;
+          if (structure.length > 0)
+          {
+            if(structure[0].status  == "false"){
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+              }else{
+                res.render('inicio/index', { title: 'Login', user: req.user, roles: req.role });
+              }
+          }
+          else
+          {
+            res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+          }
+        }
+  
+      },
+      juegos:function (req,res,next) {
+        if(!req.user) {
+            res.redirect('/');
+         } else if (req.user) {
+             const structure = req.role;
+             if (structure.length > 0)
+             {
+                if(structure[1].status  == "false"){
+                    res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+                }else{
+                    res.render('inicio/juegos', { title: 'Login', user: req.user, roles:req.role });
+                }
+             }
+             else
+             {
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+             }
+         }
+      },
+      fotos:function (req,res,next) {
+        if(!req.user) {
+            res.redirect('/');
+         } else if (req.user) {
+             const structure = req.role;
+             if (structure.length > 0)
+             {
+                if(structure[2].status  == "false"){
+                    res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+                }else{
+                    res.render('inicio/fotos', { title: 'Login', user: req.user, roles:req.role });
+                }
+             }
+             else
+             {
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+             }
+         }
+      },
+      juegosdemesa:function (req,res,next) {
+        if(!req.user) {
+            res.redirect('/');
+         } else if (req.user) {
+             const structure = req.role;
+
+             if (structure.length > 0)
+             {
+                if(structure[3].status  == "false"){
+                    res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+                }else{
+                    res.render('inicio/juegos_mesa', { title: 'Login', user: req.user, roles:req.role });
+                }
+             }
+             else
+             {
+                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
+             }
+         }
+     
       }
 }

@@ -13,21 +13,7 @@ const { promisify } = require('util');
 module.exports={
 
   
-    inicio:function (req,res,next) {
-      if(!req.user) {
-        res.redirect('/');
-      } else if (req.user) {
-        const structure = req.role;
-        if(structure[0].status  == "false"){
-          res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
-        }else{
-          res.render('inicio/index', { title: 'Login', user: req.user, roles: req.role });
-        }
-
-
-      }
-
-    },
+    
     login: function (req,res,next) {
         res.render('index');
       },
