@@ -130,7 +130,7 @@ module.exports={
         }
     });
       },
-
+      
       ilustraciones:function (req,res,next) {
         if(!req.user) {
             res.redirect('/');
@@ -150,7 +150,6 @@ module.exports={
                 res.render('inicio/denegado', { title: 'Login', user: req.user, roles:req.role });
              }
          }
-     
-      }
 
+      }
 }
