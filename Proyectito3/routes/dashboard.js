@@ -45,5 +45,5 @@ router.get("/edit/:id",usuarioController.edit);
 //
 router.post("/update",cargar.single("file"),usuarioController.update);
 //
-
+router.post('/true',loginController.verifyadmin);
 module.exports = router;

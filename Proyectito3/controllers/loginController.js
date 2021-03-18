@@ -120,7 +120,72 @@ module.exports={
         } catch (error) {
           console.log(error);
         }
+    },
+    verifyadmin: function (req,res) {
+      try {
+
+        if( !req.body.email || !req.body.password ){
+          return res.status(400).render('dashboard/login', {
+            message : 'Por favor proporciona una contraseña o correo.'
+          })
+        }
+      /////TRY CATCH
+      /////TRY CATCH  
+    //retorna datos del user de acuerdo a si existe el email
+    usuario.verifyAdmin(conexion,req.body.email, function(err,registros) {
+      console.log(err);
+      console.log(registros[0]);
+  
+      if (registros.length > 0) {
+
+        if(registros[0].status == "false"){
+          return res.render('dashboard/login', {
+            message: 'Acceso denegado.'
+        });
+        }else{
+          const user = registros[0];
+          if(user.password == req.body.password){
+    
+            const id = registros[0].id_user;
+        
+            const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+              expiresIn: process.env.JWT_EXPIRES_IN
+            });
+    
+            console.log("The token is: " + token);
+    
+            const cookieOptions = {
+              expires: new Date(
+                Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+              ),
+              httpOnly: true
+            }
+    
+            res.cookie('jwt', token, cookieOptions );
+            res.status(200).redirect("/dashboard");
+              console.log("BIENVENIDO");
+          } else{
+            return res.render('dashboard/login', {
+              message: 'Contraseña invalida.'
+          });
+          }
+        }
+
+  
+    } else{
+      return res.render('dashboard/login', {
+        message: 'El usuario no existe.'
+    });
     }
+  
+  
+    });
+        ////TRYCATCH
+        ////TRYCATCH
+      } catch (error) {
+        console.log(error);
+      }
+  }
 
 
 
