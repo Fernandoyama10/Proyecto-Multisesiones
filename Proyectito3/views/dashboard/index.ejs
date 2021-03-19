@@ -50,10 +50,11 @@
                   <tbody>
                     <% for( let usuario = 0; usuario < usuarios.length; usuario++ ) { %>
                         <tr>
-                          
+  
                             <td> <%=usuarios[usuario].id_user %> </td>
                             <td> <%=usuarios[usuario].name %> </td>
                             <td> <%=usuarios[usuario].email %> </td>
+
                             <td> <img class="img-thumbnail" width="100" src="images/<%=usuarios[usuario].image %>" alt=""></td>
                             <td>       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                               <form class="form-inline" method="get" action="/dashboard/edit/<%=usuarios[usuario].id_user %>">

@@ -106,7 +106,9 @@ edit:function (req,res){
            if(permisoss[0].status  == "false"){
             res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
            }else{
-            res.render('dashboard/edit', { title: 'Editar', user: req.user, roles: permisos, user2:registros[0] });
+            console.log(registros);
+            res.render('dashboard/edit', { title: 'Editar', user: req.user, roles: permisos, user2:registros[0], user3:registros });
+
            }
         }
         else

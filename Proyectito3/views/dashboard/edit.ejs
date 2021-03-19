@@ -49,62 +49,41 @@
                     <hr style="background-color:gainsboro;">
                     <div><h4>Acceso a modulos</h4></div>
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <label for="my-input">Juegos</label>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="true" id="checkgames" name ="checkgames">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Permitir acceso
-                            </label>
-                          </div>
-                      </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <label for="my-input">Fotos</label>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="true" id="checkfotos" name="checkfotos">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Permitir acceso
-                            </label>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="my-input">Juego de mesa</label>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="true" id="checkmesa" name="checkmesa">
-                          <label class="form-check-label" for="flexCheckChecked">
-                            Permitir acceso
-                          </label>
+                    <% for( let usuario = 1; usuario < user3.length; usuario++ ) { %>   
+              
+                      <% if(user3[usuario].status == "true"){ %>
+
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="my-input"><%=user3[usuario].section %></label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="true" id="<%=user3[usuario].section%>" name ="<%=user3[usuario].section%>" checked>
+                              <label class="form-check-label" for="flexCheckChecked">
+                                Permitir acceso
+                              </label>
+                            </div>
                         </div>
+                        </div>
+
+                        <% } else if(user3[usuario].status == "false"){ %>
+
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="my-input"><%=user3[usuario].section %></label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="true" id="<%=user3[usuario].section%>" name ="<%=user3[usuario].section%>">
+                              <label class="form-check-label" for="flexCheckChecked">
+                                Permitir acceso
+                              </label>
+                            </div>
+                        </div>
+                        </div>
+                        <% } %>
+
+
+                      <% } %>
                     </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label for="my-input">Ilustraciones</label>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="true" id="checkulustraciones" name="checkulustraciones">
-                        <label class="form-check-label" for="flexCheckChecked">
-                          Permitir acceso
-                        </label>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="my-input">Dashboard</label>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="true" id="checkdash" name="checkdash">
-                      <label class="form-check-label" for="flexCheckChecked">
-                        Permitir acceso
-                      </label>
-                    </div>
-                </div>
-              </div>
-                    </div>
+
                         <button class="btn btn-success" type="submit">Actualizar</button>
                         <a class="btn btn-primary" href="/dashboard">Cancelar</a>
                     </form>

@@ -68,14 +68,59 @@ module.exports={
 
     },
     returnPerId:function (conexion,id,funcion){
-        conexion.query("SELECT * FROM usuarios WHERE id_user=?",[id], funcion);
+      //conexion.query("SELECT * FROM usuarios WHERE id_user=?",[id], funcion);
+      conexion.query("SELECT M.section, U.id_user, section, image, name, password, email, status, O.id_module FROM usuarios as U, operations as O , module as M WHERE U.id_user = O.id_user AND O.id_module = M.id_module AND U.id_user = ? ",[id], funcion);
+      console.log("consulta de la actualización============");  
     },
     deletePerId:function (conexion,id,funcion){
         conexion.query("DELETE FROM usuarios WHERE id_user=?",[id], funcion);
     },
     updateUser:function (conexion,datos,funcion){
-        conexion.query("UPDATE usuarios SET name=?, password=?, email=? WHERE id_user=? ",[datos.name, datos.password, datos.email, datos.id_user],funcion);
+        conexion.query("UPDATE usuarios SET name=?, password=?, email=? WHERE id_user=?",[datos.name, datos.password, datos.email, datos.id_user],funcion);
+
         //updagte de los permisos
+        const modulos = [1,2,3,4,5,6];
+        var inicio = "true";
+        if(!datos.Juegos){
+
+            datos.Juegos = "false";
+        }
+        if(!datos.Fotos){
+            datos.Fotos = "false";
+        }
+        if(!datos.Juegos_mesa){
+            datos.Juegos_mesa = "false";
+        }
+        if(!datos.Ilustraciones){
+
+            datos.Ilustraciones = "false";
+        }
+        if(!datos.Dashboard){
+
+            datos.Dashboard = "false";
+        }
+
+        var status = [inicio, datos.Juegos, datos.Fotos, datos.Juegos_mesa, datos.Ilustraciones, datos.Dashboard];
+
+             for(let i=0; i < modulos.length; i++){
+
+                conexion.query("UPDATE operations SET status =? WHERE id_user=? AND id_module=?",[status[i], datos.id_user, modulos[i]], async (error, result ) =>{
+                    if(error){
+                        console.log(error);
+                        console.log("ERROR Y RESULTADO DEL UPDATE DE OPERACIONES")  
+                        console.log(result);
+                    }else{
+            
+                        console.log("============ACTUALIZACIN CORRECTAMENTE EL USUARIO CON PERMISOS============");  
+                        console.log("RESULTADO DEL INSERT DE OPERACIONES")
+                        console.log(result);
+            
+                    }
+                            
+                   });
+
+
+            }
         
     },
     updateFileUser:function (conexion,datos,archivo,funcion){
