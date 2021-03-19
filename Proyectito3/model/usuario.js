@@ -75,6 +75,8 @@ module.exports={
     },
     updateUser:function (conexion,datos,funcion){
         conexion.query("UPDATE usuarios SET name=?, password=?, email=? WHERE id_user=? ",[datos.name, datos.password, datos.email, datos.id_user],funcion);
+        //updagte de los permisos
+        
     },
     updateFileUser:function (conexion,datos,archivo,funcion){
         conexion.query("UPDATE usuarios SET image=? WHERE id_user=? ",[archivo.filename, datos.id_user],funcion);
