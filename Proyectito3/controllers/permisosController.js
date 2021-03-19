@@ -22,14 +22,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Inicio', user: req.user, roles:permisos });
                  }else{
-                  res.render('inicio/index', { title: 'Login', user: req.user, roles:permisos });
+                  res.render('inicio/index', { title: 'Inicio', user: req.user, roles:permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Inicio', user: req.user, roles:permisos });
               }
              });
          }
@@ -46,14 +46,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Inicio', user: req.user, roles:permisos });
                  }else{
-                  res.render('inicio/index', { title: 'Login', user: req.user, roles: permisos });
+                  res.render('inicio/index', { title: 'Inicio', user: req.user, roles: permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Inicio', user: req.user, roles:permisos });
               }
              });
          }
@@ -70,14 +70,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Juegos', user: req.user, roles:permisos });
                  }else{
-                  res.render('inicio/juegos', { title: 'Login', user: req.user, roles:permisos });
+                  res.render('inicio/juegos', { title: 'Juegos', user: req.user, roles:permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Juegos', user: req.user, roles:permisos });
               }
              });
          }
@@ -93,14 +93,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Fotos', user: req.user, roles:permisos });
                  }else{
-                     res.render('inicio/fotos', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/fotos', { title: 'Fotos', user: req.user, roles:permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Fotos', user: req.user, roles:permisos });
               }
              });
          }
@@ -117,14 +117,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Juegos Mesa', user: req.user, roles:permisos });
                  }else{
-                  res.render('inicio/juegos_mesa', { title: 'Login', user: req.user, roles:permisos });
+                  res.render('inicio/juegos_mesa', { title: 'Juegos Mesa', user: req.user, roles:permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Juegos Mesa', user: req.user, roles:permisos });
               }
              });
          }
@@ -143,7 +143,7 @@ module.exports={
                  if(permisoss[0].status  == "false"){
                   res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
                  }else{
-                  res.render('dashboard/index', { title: 'Login', user: req.user, roles: permisos, usuarios:datos });
+                  res.render('dashboard/index', { title: 'Dashboard', user: req.user, roles: permisos, usuarios:datos });
                  }
               }
               else
@@ -166,14 +166,14 @@ module.exports={
               if (permisoss.length > 0)
               {
                  if(permisoss[0].status  == "false"){
-                     res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                     res.render('inicio/denegado', { title: 'Ilustraciones', user: req.user, roles:permisos });
                  }else{
-                  res.render('inicio/ilustraciones', { title: 'Login', user: req.user, roles:permisos });
+                  res.render('inicio/ilustraciones', { title: 'Ilustraciones', user: req.user, roles:permisos });
                  }
               }
               else
               {
-                res.render('inicio/denegado', { title: 'Login', user: req.user, roles:permisos });
+                res.render('inicio/denegado', { title: 'Ilustraciones', user: req.user, roles:permisos });
               }
              });
          }
