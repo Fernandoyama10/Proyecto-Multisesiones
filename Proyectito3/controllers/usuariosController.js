@@ -45,7 +45,7 @@ newuser:function (req,res) {
            if(permisoss[0].status  == "false"){
             res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
            }else{
-            res.render('dashboard/newuser', { title: 'Login', user: req.user, roles: permisos });
+            res.render('dashboard/newuser', { title: 'Crear Usuario', user: req.user, roles: permisos });
            }
         }
         else
@@ -103,7 +103,7 @@ edit:function (req,res){
            if(permisoss[0].status  == "false"){
             res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
            }else{
-            res.render('dashboard/edit', { title: 'Login', user: req.user, roles: permisos, user2:registros[0] });
+            res.render('dashboard/edit', { title: 'Editar', user: req.user, roles: permisos, user2:registros[0] });
            }
         }
         else
