@@ -3,7 +3,7 @@ var conexion = require('../config/conexion');
 
 //obtener los metodos de sql del modelo usuario
 var usuario= require('../model/usuario');
-
+var permiso= require('../model/permisos');
 //libreria filesystem que permite borrar la imagen
 var borrar= require("fs");
 const jwt = require('jsonwebtoken');
@@ -32,26 +32,28 @@ usuario.getdata(conexion, async function (err,datos) {
 //crear ruta para formulario crear usuario
 newuser:function (req,res) {
 
+
+  const namepage = "sec_dashboard";
+  const datosuser = req.user;
   if(!req.user) {
     res.render('dashboard/login');
-  } else if (req.user) {
-    const structure = req.role;
-    if (structure.length > 0)
-    {
-      if(structure[5].status  == "false"){
-          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.role });
-        }else{
-          res.render('dashboard/newuser', { title: 'Login', user: req.user, roles: req.role });
+   } else if (req.user) {
+       permiso.getModulesPerName(conexion,datosuser.id_user,namepage, function(err,permisos){
+        const permisoss = permisos;
+        if (permisoss.length > 0)
+        {
+           if(permisoss[0].status  == "false"){
+            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+           }else{
+            res.render('dashboard/newuser', { title: 'Login', user: req.user, roles: permisos });
+           }
         }
-    }
-    else
-    {
-      res.render('dashboard/login', { title: 'Login', user: req.user, roles:req.role });
-    }
-  }
-
-
-  
+        else
+        {
+          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+        }
+       });
+   }  
 },
 
 
@@ -89,28 +91,29 @@ delete:function (req,res){
 //funcion para recibir los datos del usuario mediante su id para llenarlos en el formulario de actualizar datos usuario
 edit:function (req,res){
   usuario.returnPerId(conexion,req.params.id, function(err,registros){
-
-
-    if(!req.user) {
-      res.render('dashboard/login');
-    } else if (req.user) {
-      const structure = req.role;
-      if (structure.length > 0)
-      {
-        if(structure[5].status  == "false"){
-            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.role });
-          }else{
-            res.render('dashboard/edit', { title: 'Login', user: req.user, roles: req.role, usuarios:datos, user2:registros[0] });
-          }
-      }
-      else
-      {
-        res.render('dashboard/login', { title: 'Login', user: req.user, roles:req.role });
-      }
-    }
-
-
+  const namepage = "sec_dashboard";
+  const datosuser = req.user;
+  if(!req.user) {
+    res.render('/');
+   } else if (req.user) {
+       permiso.getModulesPerName(conexion,datosuser.id_user,namepage, function(err,permisos){
+        const permisoss = permisos;
+        if (permisoss.length > 0)
+        {
+           if(permisoss[0].status  == "false"){
+            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+           }else{
+            res.render('dashboard/edit', { title: 'Login', user: req.user, roles: permisos, user2:registros[0] });
+           }
+        }
+        else
+        {
+          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+        }
+       });
+   }
   });
+
  
 },
 
