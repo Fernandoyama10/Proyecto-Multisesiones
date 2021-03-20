@@ -1,5 +1,5 @@
 <%- include ../layouts/header_dashboard.ejs %> 
-
+<script type="text/javascript" src="/scripts/messages.js"></script>
        <!-- Container Fluid-->
        <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -22,21 +22,26 @@
  
               <div class="card-body">
                 <h5 class="card-title">Datos del Usuario:</h5>
+
+                <% if(typeof message!= "undefined" && message) { %>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
+      
+              <% } %>
                 <p class="card-text">
 
                   
                     <form method="post" action="/dashboard" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="my-input">Nombre Usuario:</label>
-                            <input id="my-input" class="form-control" type="text" minlength="5" maxlength = "100"  name="name" required>
+                            <input id="my-input" class="form-control" type="text" pattern="[ A-Za-zñÑáéíóúÁÉÍÓÚ]{1,50}" required title="Solo caracteres para nombre" minlength="2" maxlength = "50" name="name"  autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="my-input">Contraseña:</label>
-                            <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
+                            <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" id="password" required>
                         </div>
                         <div class="form-group">
-                          <label for="my-input">Repeitr Contraseña:</label>
-                          <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password2" required>
+                          <label for="my-input">Confirmar Contraseña:</label>
+                          <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password2" id="password2" required>
                       </div>
                         <div class="form-group">
                             <label for="my-input">Email:</label>

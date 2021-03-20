@@ -15,18 +15,14 @@ module.exports={
         if(error){
             console.log(error);
         }else{
-
-            console.log("============RECUPERAR EL ID DEL REGISTROOO=================");
-            console.log(id[0].id_user);
-            var modulo = 1;
             const modulos = [1,2,3,4,5,6];
-            var inicio = "true";
+            if(!datos.inicio){
+                datos.inicio = "false"; 
+            }
              if(!datos.checkgames){
-
                 datos.checkgames = "false"; 
             }
             if(!datos.checkfotos){
-
                 datos.checkfotos = "false";
             }
             if(!datos.checkmesa){
@@ -36,14 +32,11 @@ module.exports={
                 datos.checkulustraciones = "false";
             }
             if(!datos.checkdash){
-
                 datos.checkdash = "false";
             }
 
-            var status = [inicio, datos.checkgames, datos.checkfotos, datos.checkmesa, datos.checkulustraciones, datos.checkdash];
-
+            var status = [datos.inicio, datos.checkgames, datos.checkfotos, datos.checkmesa, datos.checkulustraciones, datos.checkdash];
                  for(let i=0; i < modulos.length; i++){
-
                     conexion.query("INSERT INTO operations (status, id_module, id_user) VALUES (?, ?, ?)",[status[i], modulos[i], id[0].id_user], async (error, result ) =>{
                         if(error){
                             console.log(error);
@@ -54,23 +47,19 @@ module.exports={
                             console.log("============REGISTRADO CORRECTAMENTE EL USUARIO CON PERMISOS=================");  
                             console.log("RESULTADO DEL INSERT DE OPERACIONES")
                             console.log(result);
-                
-                        }
-                                
+                        }     
                        });
-
-
                 }
-
         }
-
        });
 
     },
+    returnDeletePerId:function (conexion,id,funcion){
+        conexion.query("SELECT * from usuarios where id_user = ? ",[id], funcion);
+    },
     returnPerId:function (conexion,id,funcion){
       //conexion.query("SELECT * FROM usuarios WHERE id_user=?",[id], funcion);
-      conexion.query("SELECT M.section, U.id_user, section, image, name, password, email, status, O.id_module FROM usuarios as U, operations as O , module as M WHERE U.id_user = O.id_user AND O.id_module = M.id_module AND U.id_user = ? ",[id], funcion);
-      console.log("consulta de la actualización============");  
+      conexion.query("SELECT M.section, U.id_user, section, image, name, password, email, status, O.id_module FROM usuarios as U INNER JOIN operations as O ON U.id_user = O.id_user INNER JOIN module as M ON O.id_module = M.id_module WHERE U.id_user = ?",[id], funcion);
     },
     deletePerId:function (conexion,id,funcion){
         conexion.query("DELETE FROM usuarios WHERE id_user=?",[id], funcion);
@@ -80,9 +69,10 @@ module.exports={
 
         //updagte de los permisos
         const modulos = [1,2,3,4,5,6];
-        var inicio = "true";
+        if(!datos.Inicio){
+            datos.Inicio = "false";
+        }
         if(!datos.Juegos){
-
             datos.Juegos = "false";
         }
         if(!datos.Fotos){
@@ -100,7 +90,7 @@ module.exports={
             datos.Dashboard = "false";
         }
 
-        var status = [inicio, datos.Juegos, datos.Fotos, datos.Juegos_mesa, datos.Ilustraciones, datos.Dashboard];
+        var status = [datos.Inicio, datos.Juegos, datos.Fotos, datos.Juegos_mesa, datos.Ilustraciones, datos.Dashboard];
 
              for(let i=0; i < modulos.length; i++){
 

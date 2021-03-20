@@ -41,6 +41,14 @@
             <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
 
         <% } %>
+		<% if(typeof messagelogin!= "undefined" && messagelogin) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= messagelogin %></div>
+			<br>
+			<center><a href="../logout" class="txt2 hov1">
+				Cerrar Sesión
+			</a></center>
+			<br>
+        <% } %>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email"  placeholder="Ingresa tu correo">
 						<span class="focus-input100-1"></span>

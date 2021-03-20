@@ -29,12 +29,13 @@
                     
                         <div class="form-group">
                             <label for="my-input">Nombre Usuario:</label>
-                            <input id="my-input" value="<%=user2.name %>" class="form-control" type="text" name="name">
+                            <input id="my-input" value="<%=user2.name %>" class="form-control" type="text" pattern="[ A-Za-zñÑáéíóúÁÉÍÓÚ]{1,50}" required title="Solo caracteres para nombre" minlength="2" maxlength = "50" name="name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="my-input">Contraseña:</label>
-                            <input id="my-input" value="<%=user2.password %>" class="form-control" type="password" name="password">
+                            <input id="my-input" value="<%=user2.password %>" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
                         </div>
+                     
                         <div class="form-group">
                             <label for="my-input">Email:</label>
                             <input id="my-input" value="<%=user2.email %>" class="form-control" type="text" name="email">
@@ -49,7 +50,7 @@
                     <hr style="background-color:gainsboro;">
                     <div><h4>Acceso a modulos</h4></div>
                     <div class="row">
-                    <% for( let usuario = 1; usuario < user3.length; usuario++ ) { %>   
+                    <% for( let usuario = 0; usuario < user3.length; usuario++ ) { %>   
               
                       <% if(user3[usuario].status == "true"){ %>
 
