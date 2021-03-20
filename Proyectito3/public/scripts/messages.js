@@ -2,20 +2,16 @@
   var urlParams = new URLSearchParams(window.location.search);
   if(urlParams.has('delete') && urlParams.get('delete')){
   swal({
-  title: "Usuario Eliminado Exitosamente",
+  title: "Usuario eliminado exitosamente.",
   icon: "success",
   button: "Aceptar",
-}).then(()=>{
-  console.log(window.location.hostname)
-window.location.replace(window.location.origin + '/dashboard');
-
 })
 }
 
 
 if(urlParams.has('save') && urlParams.get('save')){
 swal({
-title: "Usuario Agregado Exitosamente",
+title: "Usuario agregado exitosamente.",
 icon: "success",
 button: "Aceptar",
 })
@@ -24,7 +20,7 @@ button: "Aceptar",
 
 if(urlParams.has('error') && urlParams.get('error')){
     swal({
-    title: "Falta registro de permisos",
+    title: "Falta registro de permisos.",
     icon: "error",
     button: "Aceptar",
     })

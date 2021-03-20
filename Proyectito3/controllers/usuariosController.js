@@ -196,7 +196,7 @@ update:function (req,res) {
   }
   
 
-  res.redirect('/dashboard?save=success');
+  res.redirect('/dashboard?update=success');
  
  
 }
