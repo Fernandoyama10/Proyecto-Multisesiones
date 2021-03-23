@@ -8,6 +8,7 @@ var permiso= require('../model/permisos');
 var borrar= require("fs");
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+const { error } = require('console');
 module.exports={
 
     //obtener datos en el index de /users para mandar los datos a la vista users
@@ -40,17 +41,18 @@ newuser:function (req,res) {
    } else if (req.user) {
        permiso.getModulesPerName(conexion,datosuser.id_user,namepage, function(err,permisos){
         const permisoss = permisos;
+        req.permiso = permisos;
         if (permisoss.length > 0)
         {
            if(permisoss[0].status  == "false"){
-            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.permiso });
            }else{
-            res.render('dashboard/newuser', { title: 'Crear Usuario', user: req.user, roles: permisos });
+            res.render('dashboard/newuser', { title: 'Crear Usuario', user: req.user, roles: req.permiso });
            }
         }
         else
         {
-          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
+          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.permiso });
         }
        });
    }  
@@ -59,64 +61,105 @@ newuser:function (req,res) {
 
 //funcion para guardar usuario en la base de datos y guardar imagen
 save:function (req,res) {
-  console.log("LOS DATOS SON REQ BODY");
-  console.log(req.body);
-  console.log(req.file.filename);
+
+  usuario.verifyUser(conexion,req.body.email, function(err,registros) {
+
+    if(registros.length > 0) {
+      return res.render('dashboard/newuser', {
+          message: 'El correo esta en uso', title: 'Crear Usuario', user: req.user, roles: req.permiso
+      });
+    
+  }else {
+    
+    if(req.body.password !== req.body.password2) {
+      return res.render('dashboard/newuser', {
+          message: 'Contraseñas no coinciden', title: 'Crear Usuario', user: req.user, roles: req.permiso
+      });
+  }else{
+    usuario.insert(conexion,req.body,req.file,function (err,datos) {
+      res.redirect('/dashboard?save=success');
+   });
+
+  }
+  
+
+
+
+
+  }
+
+  });
+
   // req.body son los datos recibidos por el formulario y req.file es el archivo imagen
-usuario.insert(conexion,req.body,req.file,function (err,datos) {
-   res.redirect('/dashboard');
-});
+
 },
 
 //funcion que borra el usuario y la imagen correspondiente
 delete:function (req,res){
-  console.log("Recepción de datos");
-  console.log(req.params.id);
-  //retorna el nombre de la imagen para poder localizarla y borrarla
-  usuario.returnPerId(conexion,req.params.id, function(err,registros){
-    var nombreImagen="public/images/"+(registros[0].image);
-   
-  //condicional para verificar si existe la imagen en la carpeta public/images, si es asi lo borra
-    if(borrar.existsSync(nombreImagen)){
-      borrar.unlinkSync(nombreImagen);
-    }
-    //funcion que permite borrar por el id del usuario (se obtiene por req.params.id) 
-    usuario.deletePerId(conexion,req.params.id,function(err) {
-      res.redirect('/dashboard');
-     /*return res.render('dashboard', {
-        message: 'Se elimino correctamente.'
-    });*/
-    });
-   
+  try{
+    console.log("Recepción de datos");
+    console.log(req.params.id);
+    //retorna el nombre de la imagen para poder localizarla y borrarla
+    usuario.returnDeletePerId(conexion,req.params.id, function(err,registros){
 
-  });
+      if(registros.length > 0)
+      {
+        var nombreImagen="public/images/"+(registros[0].image);
+     
+        //condicional para verificar si existe la imagen en la carpeta public/images, si es asi lo borra
+          if(borrar.existsSync(nombreImagen)){
+            borrar.unlinkSync(nombreImagen);
+          }
+          //funcion que permite borrar por el id del usuario (se obtiene por req.params.id) 
+          usuario.deletePerId(conexion,req.params.id,function(err) {
+            res.redirect('/dashboard?delete=success');
+          });
+      }else{
+        res.redirect('/dashboard?error=missing');
+      }
+
+
+
+     
+  
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
 },
 //funcion para recibir los datos del usuario mediante su id para llenarlos en el formulario de actualizar datos usuario
 edit:function (req,res){
   usuario.returnPerId(conexion,req.params.id, function(err,registros){
-  const namepage = "sec_dashboard";
-  const datosuser = req.user;
-  if(!req.user) {
-    res.render('/');
-   } else if (req.user) {
-       permiso.getModulesPerName(conexion,datosuser.id_user,namepage, function(err,permisos){
-        const permisoss = permisos;
-        if (permisoss.length > 0)
-        {
-           if(permisoss[0].status  == "false"){
-            res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
-           }else{
-            console.log(registros);
-            res.render('dashboard/edit', { title: 'Editar', user: req.user, roles: permisos, user2:registros[0], user3:registros });
+    if(registros.length > 0){
+      const namepage = "sec_dashboard";
+      const datosuser = req.user;
+      if(!req.user) {
+        res.render('/');
+       } else if (req.user) {
+           permiso.getModulesPerName(conexion,datosuser.id_user,namepage, function(err,permisos){
+            const permisoss = permisos;
+            req.permiso = permisos;
+            if (permisoss.length > 0)
+            {
+               if(permisoss[0].status  == "false"){
+                res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.permiso });
+               }else{
+                console.log(registros);
+                res.render('dashboard/edit', { title: 'Editar', user: req.user, roles: req.permiso, user2:registros[0], user3:registros });
+    
+               }
+            }
+            else
+            {
+              res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:req.permiso });
+            }
+           });
+       }
+    }else{
+      res.redirect('/dashboard?error=missing');
+    }
 
-           }
-        }
-        else
-        {
-          res.render('dashboard/authuser', { title: 'Login', message: 'Estas logueado sin permisos de Administrador, usa otra cuenta o regresa a Inicio.', user: req.user, roles:permisos });
-        }
-       });
-   }
   });
 
  
@@ -124,7 +167,7 @@ edit:function (req,res){
 
 //actualiza datos del usuario y la imagen la reemplazada en dado caso que meta una nueva el administrador
 update:function (req,res) {
-  console.log(req.body.name);
+
 
   if(req.file){
     if(req.file.filename){
@@ -153,7 +196,7 @@ update:function (req,res) {
   }
   
 
-  res.redirect('/dashboard');
+  res.redirect('/dashboard?update=success');
  
  
 }

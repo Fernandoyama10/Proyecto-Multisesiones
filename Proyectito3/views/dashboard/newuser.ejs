@@ -1,13 +1,13 @@
 <%- include ../layouts/header_dashboard.ejs %> 
-
+<script type="text/javascript" src="/scripts/messages.js"></script>
        <!-- Container Fluid-->
        <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Inicio/Crear Usuario</h1>
+          <h1 class="h3 mb-0 text-gray-800">Inicio / Crear usuario <i class="fas fa-user-plus"></i> </h1>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Pagina Principal</a></li>
-            <li class="breadcrumb-item">Dashboard</li>
- 
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item">Nuevo Usuario</li>
           </ol>
         </div>
        
@@ -22,21 +22,27 @@
  
               <div class="card-body">
                 <h5 class="card-title">Datos del Usuario:</h5>
+
+                <% if(typeof message!= "undefined" && message) { %>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
+      
+              <% } %>
+              <hr style="background-color:gainsboro;">
                 <p class="card-text">
 
                   
                     <form method="post" action="/dashboard" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="my-input">Nombre Usuario:</label>
-                            <input id="my-input" class="form-control" type="text" minlength="5" maxlength = "100"  name="name" required>
+                            <input id="my-input" class="form-control" type="text" pattern="[ A-Za-zñÑáéíóúÁÉÍÓÚ]{1,50}" required title="Solo caracteres para nombre" minlength="2" maxlength = "50" name="name"  autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="my-input">Contraseña:</label>
-                            <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" required>
+                            <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password" id="password" required>
                         </div>
                         <div class="form-group">
-                          <label for="my-input">Repeitr Contraseña:</label>
-                          <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password2" required>
+                          <label for="my-input">Confirmar Contraseña:</label>
+                          <input id="my-input" class="form-control" type="password" pattern=".{5,}$" required title="Mínimo cinco caracteres" maxlength = "40" autocomplete="off" name="password2" id="password2" required>
                       </div>
                         <div class="form-group">
                             <label for="my-input">Email:</label>
@@ -48,8 +54,20 @@
                             <input id="my-input" class="form-control-file" type="file" name="file" required>
                         </div>
                         <hr style="background-color:gainsboro;">
-                        <div><h4>Acceso a modulos</h4></div>
+                        <div><h4>Acceso a módulos</h4></div>
+                        <br>
                         <div class="row">
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label for="my-input">Inicio</label>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="inicio" name ="inicio">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                  Permitir acceso
+                                </label>
+                              </div>
+                          </div>
+                          </div>
                           <div class="col-md-2">
                             <div class="form-group">
                               <label for="my-input">Juegos</label>
@@ -107,8 +125,8 @@
                   </div>
                         </div>
                         <br>
-                        <button class="btn btn-success" type="submit" >Guardar</button>
-                    <a class="btn btn-primary" href="/dashboard">Cancelar</a>
+                        <button class="btn btn-success" type="submit">Guardar <i class="fas fa-check-circle"></i></button>
+                        <a class="btn btn-primary" href="/dashboard">Cancelar <i class="fas fa-chevron-circle-left"></i></a>
                     </form>
                 </p>
             </div>

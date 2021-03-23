@@ -27,25 +27,28 @@ module.exports={
             );
             usuario.returnPerId(conexion,id.id, function(err,resultado){
            
-              permiso.getRoles(conexion,id.id, function(err,roles){
+           if(resultado.length >0){
+            if(!resultado) {
+              return next();
+            }
+
+            req.user = resultado[0];
+
+            console.log("User is")
+            console.log(req.user);
+   
+            return next();
+         
+        
+
+           }else{
+            return res.render('index', {
+              messagelogin: 'ERROR: El usuario no tiene permisos registrados.'
+          });
+           }
      
 
-                if(!resultado) {
-                  return next();
-                }if(!roles){
-                  return next();
-                }
-
-                req.user = resultado[0];
-                req.role = roles;
-                console.log("User is")
-                console.log(req.user);
-                console.log("Elementos son")
-                console.log(req.role);
-                return next();
-              });
-            
-   
+               
             
 
           
