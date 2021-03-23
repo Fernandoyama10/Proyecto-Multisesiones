@@ -83,7 +83,7 @@ delete:function (req,res){
     //funcion que permite borrar por el id del usuario (se obtiene por req.params.id) 
     usuario.deletePerId(conexion,req.params.id,function(err) {
       res.redirect('/dashboard');
-     /**  return res.render('dashboard', {
+     /*return res.render('dashboard', {
         message: 'Se elimino correctamente.'
     });*/
     });

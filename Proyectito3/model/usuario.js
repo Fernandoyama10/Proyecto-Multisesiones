@@ -72,9 +72,9 @@ module.exports={
       conexion.query("SELECT M.section, U.id_user, section, image, name, password, email, status, O.id_module FROM usuarios as U, operations as O , module as M WHERE U.id_user = O.id_user AND O.id_module = M.id_module AND U.id_user = ? ",[id], funcion);
       console.log("consulta de la actualización============");  
     },
-    deletePerId:function (conexion,id,funcion){
+    /*deletePerId:function (conexion,id,funcion){
         conexion.query("DELETE FROM usuarios WHERE id_user=?",[id], funcion);
-    },
+    },*/
     updateUser:function (conexion,datos,funcion){
         conexion.query("UPDATE usuarios SET name=?, password=?, email=? WHERE id_user=?",[datos.name, datos.password, datos.email, datos.id_user],funcion);
 
